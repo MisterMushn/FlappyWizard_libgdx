@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
@@ -32,8 +34,11 @@ public class GameScreen implements Screen, InputProcessor {
 	List<TupleTurm> TupleTurmListe = new ArrayList<TupleTurm>();
 	int letzteElement = 0;
 
-	Sprite fml = new Sprite(game.luna);
-	Sprite tester = new Sprite(game.dementorCutted);
+
+
+		Sprite fml;
+		Sprite tester;
+
 
 
 
@@ -59,11 +64,17 @@ public class GameScreen implements Screen, InputProcessor {
 
 
 		{//Sprite Test
-			fml.setScale(0.1f);
-			tester.setScale(0.1f);
 
-			fml.setPosition(100f, 100f);
-			tester.setPosition(400f, 100f);
+			fml = new Sprite(game.luna);
+			tester = new Sprite(game.dementorCutted);
+
+			//fml.setScale(0.1f);
+			//tester.setScale(0.01f);
+			fml.setSize(100, 100);
+			tester.setSize(100,200);
+
+			fml.setPosition(4f, 4f);
+			tester.setPosition(4f, 0f);
 		}
 	}	
 
@@ -147,8 +158,10 @@ public class GameScreen implements Screen, InputProcessor {
 
 
 		if(true){//Zeichnen
+
+			game.batch.setProjectionMatrix(camera.combined); //kam extra
 			game.batch.begin();
-			game.font.draw(game.batch, "Drops Collected: ", Gdx.graphics.getWidth()*0.5f, 480);
+			//game.font.draw(game.batch, "Drops Collected: ", Gdx.graphics.getWidth()*0.5f, 480);
 
 			//game.batch.draw(bucketImage, bucket.x, bucket.y, bucket.width, bucket.height); //selbe wie unten
 			game.batch.draw(game.luna, camera.viewportWidth/2 - game.luna.getWidth()*0.2f /2, lunaHeight, game.luna.getWidth()*0.1f, game.luna.getWidth()*0.2f);
@@ -169,7 +182,8 @@ public class GameScreen implements Screen, InputProcessor {
 
 			//for(int i = 0; i<TupleTurmListe.size(); i++){
 			for(int i = 0; i<=letzteElement; i++){
-				TupleTurmListe.get(i).setPosX(TupleTurmListe.get(i).getPosX() - 100*delta);
+				TupleTurmListe.get(i).setPosX(TupleTurmListe.get(i).getPosX() - 1000*delta);
+
 				game.batch.draw(TupleTurmListe.get(i).getTurm(), TupleTurmListe.get(i).getPosX(), TupleTurmListe.get(i).getHeightTurm(),
 						game.turm_gryffindor.getWidth()*0.1f, game.turm_gryffindor.getHeight()*0.1f);
 
@@ -179,7 +193,26 @@ public class GameScreen implements Screen, InputProcessor {
 
 
 
+			{//Sprite Test
+				fml.setPosition(fml.getX()-1f, fml.getY());
+				tester.setPosition(tester.getX()-1f, tester.getY());
+				fml.draw(game.batch);
+				tester.draw(game.batch);
+				//game.batch.draw(tester, 100, 200,100,200);
+				//game.batch.draw(tester,0,0);
 
+				if(Intersector.overlaps(fml.getBoundingRectangle(), tester.getBoundingRectangle())){
+					game.font.draw(game.batch, "Drops Collected: ", 0, 460);
+
+				}
+			}
+
+
+			{//DEBUG
+				game.font.draw(game.batch, "Letzter \"Index\": " + letzteElement, 0, 480);
+				game.font.draw(game.batch, "TubleMaxIndesx: " + TupleTurmListe.size(), 0, 500);
+				game.font.draw(game.batch, "Position " + tester.getX() + " " + tester.getY() + " " + fml.getX()  + " " + fml.getY(), 0, 520);
+			}
 
 
 			game.batch.end();
@@ -195,6 +228,7 @@ public class GameScreen implements Screen, InputProcessor {
 			if(TupleTurmListe.get(0).getPosX() + game.dementorCutted.getWidth() < 0){
 				TupleTurmListe.remove(0); //remove Index, nicht Objekt
 				TupleTurmListe.add(new TupleTurm(game.turm_gryffindor, game.dementorCutted, 50, 100)); //XXX Hier sollte Height verändert werden, damit nicht immer gleich bleibt
+				TupleTurmListe.get(19).setPosX(Gdx.graphics.getWidth()-10f);
 				letzteElement -= 1;
 			}
 		}
@@ -218,9 +252,7 @@ public class GameScreen implements Screen, InputProcessor {
 		}
 
 
-		{//Sprite Test
-			//if(Intersector.)
-		}
+
 
 
 
