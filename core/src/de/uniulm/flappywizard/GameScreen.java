@@ -20,6 +20,9 @@ public class GameScreen implements Screen, InputProcessor {
 	OrthographicCamera camera;
 
 	float PIXELS_TO_METERS = 100f;
+	float velocity = 7f;
+
+	float lunaHeight = 0f;
 	
 	public GameScreen(FlappyWizardGame game) {
 		this.game = game;
@@ -33,9 +36,8 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-
+		/**
 		camera.update();
-
 		//DAS WAR
 		//Gdx.gl.glClearColor(0, 0.5f, 0.5f, 1);
 		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -92,6 +94,49 @@ public class GameScreen implements Screen, InputProcessor {
 
 		game.debugRenderer.render(game.world, game.batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS,
 				PIXELS_TO_METERS, 0));
+		*/
+
+
+
+		camera.update();
+
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		game.batch.setProjectionMatrix(camera.combined);
+
+
+		if(true){//Zeichnen
+			game.batch.begin();
+			game.font.draw(game.batch, "Drops Collected: ", Gdx.graphics.getWidth()*0.5, 480);
+
+			//game.batch.draw(bucketImage, bucket.x, bucket.y, bucket.width, bucket.height); //selbe wie unten
+			//game.batch.draw(game.luna, camera.viewportWidth/2 - game.luna.getWidth()*0.2f /2, lunaHeight, game.luna.getWidth()*0.1f, game.luna.getWidth()*0.2f);
+
+			game.batch.end();
+		}
+
+
+
+		if(true){//Bewegung der Hexe
+			//sollte eigentlich auch mit delta hoch gehen
+			if(Gdx.input.isTouched()){
+				lunaHeight += 20f;
+				velocity = 7f;
+			}
+			if(velocity>=0){
+				velocity += 1f*delta;
+			}else {
+				velocity = 0f;
+			}
+
+			System.out.println("" + delta + " " + velocity + " " + lunaHeight);
+			lunaHeight -= 10f*delta + velocity;
+			//lunaHeight -= 10f*delta;
+		}
+
+
+		//Bewegung der Türme
 
 	}
 	

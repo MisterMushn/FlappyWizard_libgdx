@@ -88,25 +88,7 @@ public class FlappyWizardGame extends Game {
 
 
 
-
-
-
-
-
-
-
-
-
-
-		debugRenderer = new Box2DDebugRenderer();
-
-
-
-
-
-
-
-
+		//debugRenderer = new Box2DDebugRenderer();
 
 
 		this.setScreen(new MainMenuScreen(this));
