@@ -219,7 +219,7 @@ public class GameScreen implements Screen, InputProcessor {
 
 
 		{//Sprite Test
-			if(Intersector.)
+			//if(Intersector.)
 		}
 
 
