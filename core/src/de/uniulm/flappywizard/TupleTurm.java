@@ -3,7 +3,7 @@ package de.uniulm.flappywizard;
 import com.badlogic.gdx.graphics.Texture;
 import org.w3c.dom.Text;
 
-public class TupleTurm<X> {
+public class TupleTurm {
     private final Texture Turm;
     private final Texture Dementor;
 

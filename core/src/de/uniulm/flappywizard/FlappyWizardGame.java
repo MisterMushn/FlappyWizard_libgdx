@@ -21,7 +21,7 @@ public class FlappyWizardGame extends Game {
 	public Texture hermine;
 	public Texture harry, luna, malfoy, cedrig;
 	public Texture item_blau, item_gruen, item_rot, item_silber;
-	public Texture dementor, turm_gryffindor, turm_huffelpuff, turm_ravenclaw, turm_slytherin;
+	public Texture dementorCutted, turm_gryffindor, turm_huffelpuff, turm_ravenclaw, turm_slytherin;
 
 	public Sprite lunaSprite, turm_gryffindorSprite, item_blauSprite, item_gruenSprite, item_rotSprite,item_silberSprite;
 	public Body lunaBody, turm_gryffindorBody, item_blauBody, item_gruenBody, item_rotBody, item_silberBody;
@@ -52,7 +52,7 @@ public class FlappyWizardGame extends Game {
 		item_rot = new Texture("png/item_rot.png");
 		item_silber = new Texture("png/item_silber.png");
 		
-		dementor = new Texture("png/dementor.png");
+		dementorCutted = new Texture("png/dementorCutted.png");
 		turm_gryffindor = new Texture("png/turm_gryffindor.png");
 		turm_huffelpuff = new Texture("png/turm_huffelpuff.png");
 		turm_ravenclaw = new Texture("png/turm_ravenclaw.png");
@@ -116,7 +116,7 @@ public class FlappyWizardGame extends Game {
 		item_rot.dispose();
 		item_silber.dispose();
 
-		dementor.dispose();
+		dementorCutted.dispose();
 		turm_gryffindor.dispose();
 		turm_huffelpuff.dispose();
 		turm_ravenclaw.dispose();
